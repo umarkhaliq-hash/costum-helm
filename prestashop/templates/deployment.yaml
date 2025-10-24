@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  labels:
+    app: {{ .Values.appName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+      - name: prestashop
+        image: "{{ .Values.prestashop.image.name }}:{{ .Values.prestashop.image.tag}}"
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+
+        env:
+        - name: DB_SERVER
+          value: "{{ .Values.service.name }}"
+        - name: DB_NAME
+          value: "{{ .Values.mysql.Prestashop}}"
+        - name: DB_USER
+          value: "{{ .Values.mysql.Prestashop}}"
+        - name: DB_PASSWD
+          value: "{{ .Values.mysql.mysqlPassword}}"
+        - name: PS_INSTALL_AUTO
+          value: "1"
+        - name: PS_DOMAIN
+          value: "localhost:8095"
+        - name: ADMIN_MAIL
+          value: "admin@prestashop.com"
+        - name: ADMIN_PASSWD
+          value: "admin123"
+        - name: PS_DEMO_MODE
+          value: "0"
+        - name: PS_ENABLE_SSL
+          value: "0"

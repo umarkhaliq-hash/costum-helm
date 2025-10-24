@@ -1,0 +1,9 @@
+appName: mywebapp
+
+configmap:
+    name: mywebmap
+    CUSTOM_HEADER: "this is my costum chart design app"
+
+image:
+  name: devopsjourney1/mywebapp
+  tag: latest

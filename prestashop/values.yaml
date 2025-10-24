@@ -1,0 +1,24 @@
+appName: prestashop
+configmap:
+    name: myprestoshop-configmap
+prestashop:
+   image:
+     name: prestashop/prestashop 
+     tag: 8.1 
+
+service:
+   name: mysql-service
+   app:  mysql
+deployment:
+   name: mysql-deployment
+   app: mysql
+
+mysql:
+  image: 
+  name: mysql
+  tag: latest
+  RootPassword: rootpassword
+  Prestashop: prestashop
+  mysqlPassword: prestashop123
+
+

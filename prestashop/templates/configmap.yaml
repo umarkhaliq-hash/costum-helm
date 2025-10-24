@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configmap.name }}
+data:
+  database-host: "mysql-service"
+  database-name: "prestashop"
+  database-user: "prestashop"
+  shop-name: "My PrestaShop Store"
+  shop-domain: "localhost"
+  admin-email: "admin@prestashop.com"
+  timezone: "Europe/Paris"
+  language: "en"
+  country: "US"
+  currency: "USD"
